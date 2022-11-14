@@ -1,19 +1,27 @@
 package com.Grupo2.ReservaQuinchos.entidades;
 
 import com.Grupo2.ReservaQuinchos.enumeraciones.Rol;
+import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Data
 public class Usuario extends Base{
     private String nombre;
-    private String mail;
+    private String apellido;
+    private String email;
     private String contrasena;
-    private int telefono;
     private boolean estadoUsuario;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
+
+    @OneToOne
+    private Imagen imagen;
+
+    @OneToMany
+    private List<Devolucion> devoluciones = new ArrayList<>();
 }

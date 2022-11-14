@@ -11,7 +11,7 @@ import java.util.Optional;
 public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
     protected BaseRepository<E, ID> baseRepository;
 
-    public BaseServiceImpl(BaseRepository<E, ID> baseRepository){
+    public BaseServiceImpl(BaseRepository<E, ID> baseRepository) {
         this.baseRepository = baseRepository;
     }
 
@@ -20,7 +20,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
         try {
             Optional<E> resultado = baseRepository.findById(id);
             return resultado.get();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -34,7 +34,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
         try {
             baseRepository.save(entity);
             return entity;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -45,18 +45,9 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
         try {
             List<E> e = baseRepository.findAll();
             return e;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
-    }
-    @Override
-    public E update(ID ig, E entity) throws Exception {
-        return null;
-    }
-
-    @Override
-    public boolean delete(ID id) throws Exception {
-        return false;
     }
 }

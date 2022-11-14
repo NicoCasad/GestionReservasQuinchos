@@ -2,10 +2,9 @@ package com.Grupo2.ReservaQuinchos.entidades;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +18,13 @@ public class Reserva extends Base{
     private Date fechaHasta;
     private float precioTotal;
     private boolean estadoReserva;
+
+    @ManyToOne
+    private Usuario usuario;
+
+    @ManyToOne
+    private Quincho quincho;
+
+    @ManyToMany
+    private List<Servicio> servicios;
 }
