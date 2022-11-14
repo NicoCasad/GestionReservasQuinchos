@@ -104,7 +104,7 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
     @Override
     @Transactional
     public void actualizar(MultipartFile imagen, Long id, String nombre, String apellido, String email, String contrasena) throws Exception{
-        //validar(nombre, apellido, email, contrasena);
+        validar(nombre, apellido, email, contrasena);
         Optional<Usuario> respuesta = usuarioRepository.findById(id);
 
         if (respuesta.isPresent()){
