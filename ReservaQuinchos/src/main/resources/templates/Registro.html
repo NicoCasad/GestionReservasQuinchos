@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,55 +10,63 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../static/Registro.css" />
+    <link rel="stylesheet" href="/Registro.css" />
   </head>
   <body>
     <header>
-      <nav class="navbar" style="background-image: url(../static/Images/fondo.png)">
+      <nav class="navbar" style="background-image: url(/Images/fondo.png)">
         <div class="container-fluid">
           <a class="navbar-brand" style="color: white">MERCADOQUINCHO</a>
-          <button class="btn btn-outline-success" type="button">INICIO</button>
+          <a th:href="@{/}" class="btn btn-outline-success" type="button">INICIO</a>
         </div>
       </nav>
     </header>
     <main>
-      <form class="registroForm">
+      <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+        <div class="card-body">
+          <h5 class="card-title">Error</h5>
+          <p class="card-text" th:text="${error}"></p>
+        </div>
+      </div>
+      <form class="registroForm" th:action="@{/usuario/registro}" method="post" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Nombre</label>
           <input
             type="text"
             class="form-control"
             id="exampleInputEmail1"
+            name="nombre"
             aria-describedby="emailHelp"
             required
           />
 
           <label for="exampleInputPassword1" class="form-label">Apellido</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" required/>
-
-          <label for="exampleInputPassword1" class="form-label">Telefono</label>
-          <input
-            type="tel"
-            class="form-control"
-            id="exampleInputPassword1"
-            required
-          />
+          <input type="text" class="form-control" name="apellido" id="exampleInputPassword1" required/>
 
           <label for="exampleInputEmail1" class="form-label">Correo</label>
           <input
             type="email"
             class="form-control"
+            name="email"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             required
           />
-
+          <label for="telefono" class="form-label">Telefono</label>
+          <input
+                  type="tel"
+                  class="form-control"
+                  name="telefono"
+                  id="telefono"
+                  required
+          />
           <label for="exampleInputPassword1" class="form-label"
             >Contraseña</label
           >
           <input
             type="password"
             class="form-control"
+            name="contrasena"
             id="exampleInputPassword1"
             required
           />
@@ -67,10 +75,11 @@
           <select
             class="form-select"
             aria-label="Default select example"
+            name="rol"
             id="rolUsuario"
           >
-            <option value="1">Cliente</option>
-            <option value="2">Propietario</option>
+            <option value="CLIENTE">Cliente</option>
+            <option value="PROPIETARIO">Propietario</option>
           </select>
 
           <label for="inputGroupFile04">Seleccione imagen de perfil</label>
