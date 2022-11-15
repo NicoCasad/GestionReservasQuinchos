@@ -5,7 +5,6 @@ import com.Grupo2.ReservaQuinchos.entidades.Usuario;
 import com.Grupo2.ReservaQuinchos.enumeraciones.Rol;
 import com.Grupo2.ReservaQuinchos.excepciones.MyException;
 import com.Grupo2.ReservaQuinchos.repositorio.BaseRepository;
-import com.Grupo2.ReservaQuinchos.repositorio.ImagenRepository;
 import com.Grupo2.ReservaQuinchos.repositorio.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,13 +37,14 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
 
     @Override
     @Transactional
-    public void registrar(MultipartFile imagen, String email, String nombre, String apellido, String rol, String contrasena) throws Exception {
+    public void registrar(MultipartFile imagen, String telefono, String email, String nombre, String apellido, String rol, String contrasena) throws Exception {
         validar(nombre, apellido, email, contrasena);
         Usuario usuario = new Usuario();
 
         usuario.setEstadoUsuario(true);
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
+        usuario.setTelefono(telefono);
         usuario.setEmail(email);
         usuario.setContrasena(new BCryptPasswordEncoder().encode(contrasena));
 
@@ -99,11 +99,15 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
         if (email == null || email.isEmpty()){
             throw new MyException("el email no puede ser nulo o estar vacio");
         }
+        Usuario usuario = usuarioRepository.buscarPorEmail(email);
+        if (usuario != null){
+            throw new MyException("El mail ya esta registrado");
+        }
     }
 
     @Override
     @Transactional
-    public void actualizar(MultipartFile imagen, Long id, String nombre, String apellido, String email, String contrasena) throws Exception{
+    public void actualizar(MultipartFile imagen, Long id, String telefono, String nombre, String apellido, String email, String contrasena) throws Exception{
         validar(nombre, apellido, email, contrasena);
         Optional<Usuario> respuesta = usuarioRepository.findById(id);
 
@@ -111,6 +115,7 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
             Usuario usuario = respuesta.get();
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
+            usuario.setTelefono(telefono);
             usuario.setEmail(email);
             usuario.setContrasena(new BCryptPasswordEncoder().encode(contrasena));
 
