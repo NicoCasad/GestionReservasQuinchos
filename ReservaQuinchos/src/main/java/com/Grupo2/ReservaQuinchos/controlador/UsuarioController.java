@@ -22,24 +22,25 @@ public class UsuarioController{
 
     @GetMapping(value = "/registrar")
     public String registrar(){
-        return "form.html";
+        return "Registro.html";
     }
 
     @PostMapping(value = "/registro")
-    public String registro(MultipartFile imagen, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String rol, @RequestParam String contrasena, ModelMap modelo){
+    public String registro(MultipartFile imagen, String telefono, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String rol, @RequestParam String contrasena, ModelMap modelo){
         try {
-            usuarioService.registrar(imagen, email, nombre, apellido, rol, contrasena);
+            usuarioService.registrar(imagen, telefono, email, nombre, apellido, rol, contrasena);
             modelo.put("exito", "Registrado correctamente");
             return  "index.html";
         }catch(Exception e){
             modelo.put("error", e.getMessage());
-            return "form.html";
+            return "Registro.html";
         }
     }
 
     @GetMapping(value = "/login")
-    public String login(){
+    public String login(ModelMap modelo){
         return "login.html";
+
     }
 
     @GetMapping(value = "/listar")
@@ -50,44 +51,46 @@ public class UsuarioController{
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }finally {
-            return "usuario_list.html";
+            return "listar_usuarios.html";
         }
     }
 
     @GetMapping(value = "/modificar/{id}")
-    public String modificar(@PathParam("id") Long id, ModelMap modelo){
+    public String modificar(@PathVariable("id") Long id, ModelMap modelo){
         try{
-            modelo.put("usuario", usuarioService.findByID((id)));
-            return "modificar_usuario.html";
+            System.out.println("entro");
+            Usuario usuario = usuarioService.findByID(id);
+            modelo.put("usuario", usuario);
+            System.out.println(usuario);
+            return "modificar.html";
         }catch (Exception e){
             modelo.put("error", e.getMessage());
-            return "modificar_usuario.html";
+            return "modificar.html";
         }
     }
 
     @PostMapping(value = "/modificado/{id}")
-    public String modificado(@PathVariable("id") Long id, MultipartFile imagen, String nombre, String apellido, String email, String contrasena, ModelMap modelo){
+    public String modificado(@PathVariable Long id, MultipartFile imagen, String telefono, String nombre, String apellido, String email, String contrasena, ModelMap modelo){
 
         try{
-            System.out.println(contrasena);
-            usuarioService.actualizar(imagen, id, nombre, apellido, email, contrasena);
+            usuarioService.actualizar(imagen, id, telefono, nombre, apellido, email, contrasena);
             return "redirect:../listar";
         }catch (Exception e){
             modelo.put("error", e.getMessage());
-            return "modificar_usuario.html";
+            return "redirect:../listar";
         }
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @GetMapping(value = "/delete/{id}")
     public String delete(@PathVariable("id") Long id, ModelMap modelo){
         try{
             usuarioService.eliminar(id);
-            modelo.put("excito", "eliminado correctamente");
+            modelo.put("exito", "eliminado correctamente");
 
         }catch (Exception e){
             modelo.put("error", e.getMessage());
         }finally {
-            return "usuario_list.html";
+            return "listar_usuarios.html";
         }
     }
 }

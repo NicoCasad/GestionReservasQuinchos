@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
+=======
+<html xmlns:th="http://www.thymeleaf.org">
+>>>>>>> 2bc902e88543286929cbda1bd04622c6f50099d2
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,6 +14,7 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+<<<<<<< HEAD
     <link rel="stylesheet" href="../static/Registro.css" />
   </head>
   <body>
@@ -18,22 +23,47 @@
         <div class="container-fluid">
           <a class="navbar-brand" style="color: white">MERCADOQUINCHO</a>
           <button class="btn btn-outline-success" type="button">INICIO</button>
+=======
+    <link rel="stylesheet" href="/Registro.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar" style="background-image: url(/Images/fondo.png)">
+        <div class="container-fluid">
+          <a class="navbar-brand" style="color: white">MERCADOQUINCHO</a>
+          <a th:href="@{/}" class="btn btn-outline-success" type="button">INICIO</a>
+>>>>>>> 2bc902e88543286929cbda1bd04622c6f50099d2
         </div>
       </nav>
     </header>
     <main>
+<<<<<<< HEAD
       <form class="registroForm">
+=======
+      <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+        <div class="card-body">
+          <h5 class="card-title">Error</h5>
+          <p class="card-text" th:text="${error}"></p>
+        </div>
+      </div>
+      <form class="registroForm" th:action="@{/usuario/registro}" method="post" enctype="multipart/form-data">
+>>>>>>> 2bc902e88543286929cbda1bd04622c6f50099d2
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Nombre</label>
           <input
             type="text"
             class="form-control"
             id="exampleInputEmail1"
+<<<<<<< HEAD
+=======
+            name="nombre"
+>>>>>>> 2bc902e88543286929cbda1bd04622c6f50099d2
             aria-describedby="emailHelp"
             required
           />
 
           <label for="exampleInputPassword1" class="form-label">Apellido</label>
+<<<<<<< HEAD
           <input type="text" class="form-control" id="exampleInputPassword1" required/>
 
           <label for="exampleInputPassword1" class="form-label">Telefono</label>
@@ -43,22 +73,44 @@
             id="exampleInputPassword1"
             required
           />
+=======
+          <input type="text" class="form-control" name="apellido" id="exampleInputPassword1" required/>
+>>>>>>> 2bc902e88543286929cbda1bd04622c6f50099d2
 
           <label for="exampleInputEmail1" class="form-label">Correo</label>
           <input
             type="email"
             class="form-control"
+<<<<<<< HEAD
+=======
+            name="email"
+>>>>>>> 2bc902e88543286929cbda1bd04622c6f50099d2
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             required
           />
+<<<<<<< HEAD
 
+=======
+          <label for="telefono" class="form-label">Telefono</label>
+          <input
+                  type="tel"
+                  class="form-control"
+                  name="telefono"
+                  id="telefono"
+                  required
+          />
+>>>>>>> 2bc902e88543286929cbda1bd04622c6f50099d2
           <label for="exampleInputPassword1" class="form-label"
             >Contraseña</label
           >
           <input
             type="password"
             class="form-control"
+<<<<<<< HEAD
+=======
+            name="contrasena"
+>>>>>>> 2bc902e88543286929cbda1bd04622c6f50099d2
             id="exampleInputPassword1"
             required
           />
@@ -67,10 +119,18 @@
           <select
             class="form-select"
             aria-label="Default select example"
+<<<<<<< HEAD
             id="rolUsuario"
           >
             <option value="1">Cliente</option>
             <option value="2">Propietario</option>
+=======
+            name="rol"
+            id="rolUsuario"
+          >
+            <option value="CLIENTE">Cliente</option>
+            <option value="PROPIETARIO">Propietario</option>
+>>>>>>> 2bc902e88543286929cbda1bd04622c6f50099d2
           </select>
 
           <label for="inputGroupFile04">Seleccione imagen de perfil</label>
