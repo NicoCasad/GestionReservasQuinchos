@@ -104,15 +104,37 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
             throw new MyException("El mail ya esta registrado");
         }
     }
+    @Override
+    public void validarActualizar(String nombre, String apellido, String email, String contrasena, Usuario usuario) throws Exception{
+
+        if (nombre == null || nombre.isEmpty()){
+            throw new MyException("el nombre no puede ser nulo o estar vacio");
+        }
+        if (apellido == null || apellido.isEmpty()){
+            throw new MyException("el apellido no puede ser nulo o estar vacio");
+        }
+        if (contrasena == null || contrasena.isEmpty()){
+            throw new MyException("el contrasena no puede ser nulo o estar vacio");
+        }
+        if (email == null || email.isEmpty()){
+            throw new MyException("el email no puede ser nulo o estar vacio");
+        }
+        if (!usuario.getEmail().equals(email)){
+            Usuario usuario1 = usuarioRepository.buscarPorEmail(email);
+            if (usuario != null){
+                throw new MyException("El mail ya esta registrado");
+            }
+        }
+    }
 
     @Override
     @Transactional
     public void actualizar(MultipartFile imagen, Long id, String telefono, String nombre, String apellido, String email, String contrasena) throws Exception{
-        validar(nombre, apellido, email, contrasena);
-        Optional<Usuario> respuesta = usuarioRepository.findById(id);
 
+        Optional<Usuario> respuesta = usuarioRepository.findById(id);
         if (respuesta.isPresent()){
             Usuario usuario = respuesta.get();
+            validarActualizar(nombre, apellido, email, contrasena, usuario);
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setTelefono(telefono);
