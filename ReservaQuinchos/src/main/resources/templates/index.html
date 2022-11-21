@@ -12,6 +12,7 @@
   />
   <link rel="stylesheet" type="text/css" href="../static/styles.css">
   <link rel="stylesheet" type="text/css" href="../static/normalize.css">
+  <script src="../static/script.js"></script>
 </head>
 <body>
 <header>
@@ -20,6 +21,16 @@
       <div class="nav-container__boton-inicio"><a>Quinchos S.A.</a></div>
       <div class="nav-container__boton-reserva" ><a data-bs-toggle="modal" data-bs-target="#login" >Reservar</a></div>
       <div class="nav-container__boton-login"><a th:href="@{/usuario/registrar}" >Sign-in</a></div>
+      <div class="dropdown">
+	<button onclick="myFunction()" class="dropbtn">Mi cuenta</button>
+            <div id="myDropdown" class="dropdown-content">
+	 	<a href="#">Perfil</a>
+                <a href="#">Mis reservas</a>
+		<a href="#">Mis quinchos</a>
+		<a href="#">Menú admin</a>
+		<a href="#">Cerrar sesión</a>
+            </div>
+      </div>
     </div>
     <div class="separador"></div>
   </nav>
