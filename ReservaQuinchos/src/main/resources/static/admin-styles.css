@@ -1,0 +1,125 @@
+nav{
+	background: white;
+	height: 75px;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.nav-container{
+	height: 50px;
+	padding-top: 12.2px;
+}
+
+.nav-container div{
+	height: 50px;
+	width: 130px;
+	background: darkred;
+	display: inline-block;
+	padding: 15px;
+	text-align: center;
+	border-radius: 7px;
+	font-weight: 600;
+}
+
+
+
+div .nav-container__boton-inicio{
+	position: absolute;
+	left: 10px;
+	color: rgb(0, 191.25, 0);
+	background: white;
+	font-size: 1.2em;
+	padding: 7px;
+}
+
+div .nav-container__boton-reserva{
+	position: absolute;
+	right: 150px;
+	color: white;
+	background: rgb(0, 191.25, 0);
+	transition: .5s;
+}
+
+div .nav-container__boton-login{
+	position: absolute;
+	right: 10px;
+	color: white;
+	background: rgb(0, 191.25, 0);
+	transition: .5s,padding 0s;
+}
+
+div .nav-container__boton-reserva:hover, div.nav-container__boton-login:hover{
+	background: white;
+	border: 1px solid rgb(0, 191.25, 0);
+	color: rgb(0, 191.25, 0);
+	padding: 14px;
+}
+
+
+
+.separador{
+	height: 3px;
+	width: 90%;
+	background: rgb(0, 191.25, 0);
+	display: inline-block;
+	padding: 0px;
+	border-radius: 0px;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+ 	transform: translate(-50%, 0);
+}
+
+.menu-container{
+	display: block;
+	text-align: center;
+	padding: 150px;
+}
+
+.menu-container__menu li{
+	display: inline-block;
+}
+
+.menu-container__menu li:first-child{
+	margin-right: 150px;
+}
+
+.menu-container__menu li img{
+	width: 300px;
+	height: 300px;
+	display: block;
+	border-radius: 7px;
+	margin-bottom: 2px;
+}
+
+.menu-container__menu li button:hover{
+	background: white;
+	border: 1px solid rgb(0, 191.25, 0);
+	color: rgb(0, 191.25, 0);
+	padding: 4px;
+}
+
+.menu-container__menu li button{
+	width: 300px;
+	height: 50px;
+	border: 0px;
+	border-radius: 7px;
+	color: white;
+	background: rgb(0, 191.25, 0);
+	transition: .5s,padding 0s;
+	font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+footer{
+	background: #ddd;
+	height: 150px;
+}
