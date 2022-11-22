@@ -2,15 +2,12 @@ package com.Grupo2.ReservaQuinchos.controlador;
 
 import com.Grupo2.ReservaQuinchos.entidades.Usuario;
 import com.Grupo2.ReservaQuinchos.servicio.UsuarioService;
-import com.Grupo2.ReservaQuinchos.servicio.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
@@ -58,10 +55,8 @@ public class UsuarioController{
     @GetMapping(value = "/modificar/{id}")
     public String modificar(@PathVariable("id") Long id, ModelMap modelo){
         try{
-            System.out.println("entro");
             Usuario usuario = usuarioService.findByID(id);
-            modelo.put("usuario", usuario);
-            System.out.println(usuario);
+            modelo.addAttribute("usuario", usuario);
             return "modificar.html";
         }catch (Exception e){
             modelo.put("error", e.getMessage());
@@ -70,14 +65,18 @@ public class UsuarioController{
     }
 
     @PostMapping(value = "/modificado/{id}")
-    public String modificado(@PathVariable Long id, MultipartFile imagen, String telefono, String nombre, String apellido, String email, String contrasena, ModelMap modelo){
+    public String modificado(@PathVariable Long id, MultipartFile imagen, String telefono, String nombre, String apellido, String email, String contrasena, ModelMap modelo) throws Exception {
 
         try{
             usuarioService.actualizar(imagen, id, telefono, nombre, apellido, email, contrasena);
+            List<Usuario> usuarios = usuarioService.findAll();
+            modelo.addAttribute("usuarios", usuarios);
             return "redirect:../listar";
         }catch (Exception e){
-            modelo.put("error", e.getMessage());
-            return "redirect:../listar";
+            List<Usuario> usuarios = usuarioService.findAll();
+            modelo.addAttribute("usuarios", usuarios);
+            modelo.addAttribute("error", e.getMessage());
+            return "listar_usuarios";
         }
     }
 

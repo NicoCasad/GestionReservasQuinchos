@@ -29,20 +29,21 @@
     </div>
   </div>
   <form class="registroForm" th:action="@{/usuario/modificado/__${usuario.id}__}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id">
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Nombre</label>
+      <label for="nombre" class="form-label">Nombre</label>
       <input
               type="text"
               class="form-control"
-              id="exampleInputEmail1"
+              id="nombre"
               name="nombre"
               aria-describedby="emailHelp"
               required
               th:value="${usuario.nombre}"
       />
 
-      <label for="exampleInputPassword1" class="form-label">Apellido</label>
-      <input type="text" class="form-control" name="apellido" id="exampleInputPassword1" required th:value="${usuario.apellido}"/>
+      <label for="apellido" class="form-label">Apellido</label>
+      <input type="text" class="form-control" name="apellido" id="apellido" required th:value="${usuario.apellido}"/>
 
       <label for="exampleInputEmail1" class="form-label">Correo</label>
       <input
@@ -98,7 +99,7 @@
         />
       </div>
       <div class="botonesRegistro">
-        <input class="btn btn-primary" type="submit" value="Registrarse" />
+        <input class="btn btn-primary" type="submit" value="Modificar" />
         <input class="btn btn-primary" type="button" value="Cancelar" />
       </div>
     </div>
