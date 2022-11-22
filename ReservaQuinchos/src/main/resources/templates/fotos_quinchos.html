@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Registro</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+            />
+        <link rel="stylesheet" href="/Registro.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar" style="background-image: url(/Images/fondo.png)">
+                <div class="container-fluid">
+                    <a class="navbar-brand" style="color: white">MERCADOQUINCHO</a>
+                    <a th:href="@{/}" class="btn btn-outline-success" type="button">INICIO</a>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+                <div class="card-body">
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+
+            <div class="col-sm-3 my-2 d-flex align-content-stretch flex-wrap" th:each="imagen : ${imagenes}">
+                <div class="card">
+                    
+                    <img class="card-img-top" th:src="@{'/Images/'+${imagen.nombre}}"  alt="Card image cap">
+                    <!--
+                    <img class="card-img-top" th:src="@{'/Images/'+${imagen.nombre}}"  alt="Card image cap" height="500" width="500" >
+                    <div class="card-body">
+                        
+                        <h5 class="card-title" th:text="${imagen.id}">Product name</h5>
+                        <p class="card-text" th:text="${imagen.nombre}">Product summary</p>
+                    
+                    </div>
+                    -->
+                </div>
+            </div>
+
+
+
+
+
+            <form class="registroForm" th:action="@{/quincho/registroFotos}" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <!--
+                    <h5 class="card-title" th:text="${quincho.nombre}">Card title</h5> 
+                    <p th:text="${quincho.precioBase}"></p> 
+                    <p th:text="${quincho.ubicacion}"></p> 
+                    -->
+                    <label for="foto">Seleccione imagen</label>
+                    <div class="input-group">
+                        <input
+                            type="file"
+                            class="form-control"
+                            id="foto"
+                            name="file"
+                            aria-describedby="inputGroupFileAddon04"
+                            aria-label="Upload"
+                            />
+                    </div>
+
+                    <input type="hidden" id="id_quincho" name="id_quincho" th:value="${quincho.id}" />
+
+                    <div class="botonesRegistro">
+                        <input class="btn btn-primary" type="submit" value="Guardar Imagenes" />
+                        <input class="btn btn-primary" type="button" value="Cancelar" />
+                        <a class="btn btn-primary" th:href="@{/quincho/listar}" role="button">Finalizar registro</a>
+                    </div>
+                </div>
+            </form>
+        </main>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

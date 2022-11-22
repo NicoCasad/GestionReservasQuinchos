@@ -53,7 +53,7 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
         }else if (rol.equals(Rol.PROPIETARIO.toString())){
             usuario.setRol(Rol.PROPIETARIO);
         }
-
+        
         Imagen imagenUsuario = imagenService.guardar(imagen);
         usuario.setImagen(imagenUsuario);
 

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Registro</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+            />
+        <link rel="stylesheet" href="/Registro.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar" style="background-image: url(/Images/fondo.png)">
+                <div class="container-fluid">
+                    <a class="navbar-brand" style="color: white">MERCADOQUINCHO</a>
+                    <a th:href="@{/}" class="btn btn-outline-success" type="button">INICIO</a>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+                <div class="card-body">
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+
+            <form class="registroForm" th:action="@{/quincho/registro}" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+
+                    <label for="nombreQuincho" class="form-label">Nombre</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="nombreQuincho"
+                        name="nombre"
+                        aria-describedby="emailHelp"
+                        required
+                        />
+
+                    <label for="precioQuincho" class="form-label">Precio</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="precioQuincho"
+                        name="precioBase"
+                        required
+                        />
+
+                    <label for="ubicacionQuincho" class="form-label">Ubicación</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="ubicacionQuincho"
+                        name="ubicacion"
+                        required
+                        />
+
+                    <!--
+                    <label for="exampleInputPassword1" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" name="apellido" id="exampleInputPassword1" required/>
+          
+                    <label for="exampleInputEmail1" class="form-label">Correo</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      required
+                    />
+                    
+                    <label for="inputGroupFile04">Seleccione imagen de perfil</label>
+                    <div class="input-group">
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="inputGroupFile04"
+                        aria-describedby="inputGroupFileAddon04"
+                        aria-label="Upload"
+                      />
+                    </div>
+                    -->
+
+                    <div class="botonesRegistro">
+                        <input class="btn btn-primary" type="submit" value="Registrarse" />
+                        
+                        <a class="btn btn-primary" th:href="@{/quincho/listar}" role="button">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+
+        </main>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
